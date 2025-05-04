@@ -4,18 +4,20 @@ from selenium.webdriver.common.by import By
 
 def fragment_checker(username):
     try:
-        driver = webdriver.Firefox()
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--headless')
+        driver = webdriver.Chrome(options=chrome_options)
         try:
             driver.get(f'https://fragment.com/username/{username}')
-            content = driver.find_element(By.CLASS_NAME, 'tm-section-header-status')
-            if content.text == 'Taken':
+            status = driver.find_element(By.CLASS_NAME, 'tm-section-header-status')
+            if status.text == 'Taken':
                 print(f'@{username} is taken')
-            elif content.text in ['Available','On auction','For sale']:
+            elif status.text in ['Available','On auction','For sale']:
                 price = driver.find_element(By.CLASS_NAME, 'table-cell-value.tm-value.icon-before.icon-ton')
-                print(f'@{username} is {content.text.lower()} for {price}')
-            elif content.text == 'Sold':
+                print(f'@{username} is {status.text.lower()} for {price.text} TON')
+            elif status.text == 'Sold':
                 price = driver.find_element(By.CLASS_NAME, 'table-cell-value.tm-value.icon-before.icon-ton')
-                print(f'@{username} has been sold for {price}')
+                print(f'@{username} has been sold for {price.text} TON')
         except:
             driver.get(f'https://fragment.com/?query={username}')
             print(f'@{username} is not used / not available')
@@ -23,3 +25,4 @@ def fragment_checker(username):
         print(e)
     finally:
         driver.quit()
+
