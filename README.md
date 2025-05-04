@@ -3,6 +3,6 @@ In this repository you can find code that allows you to check the status of a ta
 **//**
 В данном репозитории вы сможете найти код, который позволяет проверить статус тега в Telegram.
 
-The code sends username data, including **status** and **price**, via a request via **Selenium**
+The code sends username data, including **status** and **price**, via **Selenium**
 **//**
-Код при помощи запроса через **Selenium** передаёт данные о юзернейме, включая **статус** и **цену**
+Код при помощи **Selenium** передаёт данные о юзернейме, включая **статус** и **цену**
